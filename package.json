@@ -8,6 +8,8 @@
     },
     "author": "Lambda School",
     "devDependencies": {
+        "express": "^4.17.1",
+        "knex": "^0.21.0",
         "nodemon": "^2.0.2"
     }
 }
