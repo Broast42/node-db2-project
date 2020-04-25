@@ -1,11 +1,11 @@
 const express = require("express")
-const db = require("../data/config")
+const db = require("./cardb")
 
 const router = express.Router()
 
 router.get("/", async (req, res, next) => {
     try{
-        const cars = await db("cars")
+        const cars = await db.get()
         res.status(200).json(cars)
     } catch(err){
         next(err)
@@ -14,11 +14,11 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
     try{
-        const [id] = await db("cars").insert(req.body)
-        const newCar = await db("cars").where("id", id).first()
+        const [id] = await db.add(req.body)
+        const newCar = await db.getById(id)
 
         res.status(201).json(newCar)
-        
+
     } catch(err){
         next(err)
     }
